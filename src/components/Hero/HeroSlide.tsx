@@ -10,7 +10,7 @@ interface HeroSlideProps {
 
 export function HeroSlide({ slide, isActive }: HeroSlideProps) {
   const contentRef = useRef<HTMLDivElement | null>(null)
-  const hasAnimated = useRef(false)
+
 
   useEffect(() => {
     if (!contentRef.current) return
