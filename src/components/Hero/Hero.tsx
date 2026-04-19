@@ -14,6 +14,7 @@ export function Hero() {
   } = useSlider()
 
   const nextSlide = SLIDES[nextIndex]
+  const nextThumb = nextSlide.bg.replace('w=1920', 'w=400')
 
   // Counter display: "01" format
   const pad = (n: number) => String(n + 1).padStart(2, '0')
@@ -33,7 +34,7 @@ export function Hero() {
 
       {/* Thumbnail: shows next slide, click to advance */}
       <HeroThumbnail
-        imgSrc={nextSlide.thumb}
+        imgSrc={nextThumb}
         onClick={goNext}
         borderRef={borderRef}
         autoplayDuration={AUTOPLAY_DURATION}

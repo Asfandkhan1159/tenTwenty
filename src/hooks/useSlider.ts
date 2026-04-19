@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { SLIDES, AUTOPLAY_DURATION } from '../constants/slides'
 
 export function useSlider() {
@@ -56,7 +56,10 @@ export function useSlider() {
     restartBorderAnimation()
   }, [restartBorderAnimation])
 
-  const nextIndex = (activeIndex + 1) % totalSlides
+  const nextIndex = useMemo(
+    () => (activeIndex + 1) % totalSlides,
+    [activeIndex, totalSlides]
+  )
 
   return {
     activeIndex,
