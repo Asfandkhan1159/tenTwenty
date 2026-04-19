@@ -4,7 +4,7 @@ import { CarouselCard } from './CarouselCard'
 import { CAROUSEL_ITEMS } from '../../constants/slides'
 
 const getCardWidth = () => (window.innerWidth >= 768 ? 320 : 260)
-const getCardGap   = () => (window.innerWidth >= 768 ? 24 : 16)
+const getCardGap = () => (window.innerWidth >= 768 ? 24 : 16)
 const DRAG_THRESHOLD = 50
 
 interface ProductCarouselProps {
@@ -12,21 +12,22 @@ interface ProductCarouselProps {
 }
 
 export function ProductCarousel({ onCarouselHover }: ProductCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(2)
   const [infoVisible, setInfoVisible] = useState(true)
 
-  const trackRef   = useRef<HTMLDivElement | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
   const isDragging = useRef(false)
-  const startX     = useRef(0)
-  const lastX      = useRef(0)
+  const startX = useRef(0)
+  const lastX = useRef(0)
   const baseOffset = useRef(0)
 
   const totalItems = CAROUSEL_ITEMS.length
 
-  const offsetForIndex = useCallback(
-    (index: number) => -index * (getCardWidth() + getCardGap()),
-    []
-  )
+  const offsetForIndex = useCallback((index: number) => {
+    const cardWidth = getCardWidth()
+    const cardGap = getCardGap()
+    return -index * (cardWidth + cardGap)
+  }, [])
 
   const snapToIndex = useCallback(
     (index: number, animate = true) => {
@@ -42,7 +43,11 @@ export function ProductCarousel({ onCarouselHover }: ProductCarouselProps) {
     [offsetForIndex]
   )
 
-  useEffect(() => { snapToIndex(0, false) }, [snapToIndex])
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      snapToIndex(0, false)
+    })
+  }, [snapToIndex])
 
   useEffect(() => {
     snapToIndex(activeIndex)
@@ -61,11 +66,11 @@ export function ProductCarousel({ onCarouselHover }: ProductCarouselProps) {
   const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     isDragging.current = true
     startX.current = e.clientX
-    lastX.current  = e.clientX
+    lastX.current = e.clientX
     baseOffset.current = offsetForIndex(activeIndex)
     const track = trackRef.current
     if (track) {
-      ;(e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId)
+      ; (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId)
     }
   }, [activeIndex, offsetForIndex])
 

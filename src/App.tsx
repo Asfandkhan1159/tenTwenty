@@ -13,12 +13,12 @@ interface ProductsSectionProps {
 
 function ProductsSection({ onCarouselHover }: ProductsSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null)
-  const titleRef   = useRef<HTMLSpanElement | null>(null)
-  const descRef    = useRef<HTMLParagraphElement | null>(null)
+  const titleRef = useRef<HTMLSpanElement | null>(null)
+  const descRef = useRef<HTMLParagraphElement | null>(null)
 
   useEffect(() => {
     const title = titleRef.current
-    const desc  = descRef.current
+    const desc = descRef.current
     if (!title || !desc) return
 
     const tl = gsap.timeline({
@@ -56,10 +56,9 @@ function ProductsSection({ onCarouselHover }: ProductsSectionProps) {
           </span>
         </h2>
         <p ref={descRef} className="products-section__desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
+          We partner with local farmers across the UAE to bring you the freshest,
+          highest-quality produce — harvested with care and delivered straight
+          from our farms to your table.
         </p>
       </div>
       <ProductCarousel onCarouselHover={onCarouselHover} />

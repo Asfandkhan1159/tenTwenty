@@ -8,7 +8,7 @@ interface HeroThumbnailProps {
   autoplayDuration: number  // ms
 }
 
-const THUMB_SIZE = 90  // px — keep in sync with CSS
+const THUMB_SIZE = 90
 
 export function HeroThumbnail({
   imgSrc,
@@ -18,7 +18,7 @@ export function HeroThumbnail({
 }: HeroThumbnailProps) {
   const svgRef = useRef<SVGSVGElement | null>(null)
 
-  // Set the CSS custom property --perimeter so the keyframe knows the full stroke length
+
   useEffect(() => {
     const el = borderRef.current
     if (!el) return
