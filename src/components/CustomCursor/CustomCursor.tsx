@@ -18,8 +18,8 @@ export function CustomCursor({ isCarouselHovered }: CustomCursorProps) {
     >
       {isCarouselHovered && (
         <span className="custom-cursor__label">
-          <span>‹ prev</span>
-          <span>next ›</span>
+          <span>‹ </span>
+          <span> ›</span>
         </span>
       )}
     </div>
