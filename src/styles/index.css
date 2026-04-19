@@ -411,6 +411,7 @@
   .products-section__title-inner {
     display: block;
     transform: translateY(100%);
+    font-weight: 300;
   }
 
   .products-section__desc {

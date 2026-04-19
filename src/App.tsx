@@ -21,23 +21,31 @@ function ProductsSection({ onCarouselHover }: ProductsSectionProps) {
     const desc = descRef.current
     if (!title || !desc) return
 
+    // Set initial states
+    gsap.set(title, { y: '105%' })
+    gsap.set(desc, { opacity: 0, y: 24 })
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top 75%',
+        start: 'top 72%',
         once: true,
       },
     })
 
+    // Title unmasks upward first
     tl.to(title, {
       y: '0%',
-      duration: 0.8,
+      duration: 0.9,
       ease: 'power3.out',
-    }).to(
-      desc,
-      { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-      '-=0.3'
-    )
+    })
+      // Paragraph fades up 0.3s after title starts
+      .to(desc, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+      }, '-=0.5')
 
     return () => { tl.kill() }
   }, [])
